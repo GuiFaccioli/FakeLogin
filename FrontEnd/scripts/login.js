@@ -9,7 +9,7 @@ const logar = async () => {
   }
 
   try {
-    const res = await fetch("http://localhost:8000/login", {
+    const res = await fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, senha }),
@@ -19,7 +19,7 @@ const logar = async () => {
     if (dados.success) {
       msg.innerText = dados.message;
       setTimeout(
-        () => (window.location.href = "http://localhost:8000/home.html"),
+        () => (window.location.href = "/home.html"),
         1500,
       );
     } else {
