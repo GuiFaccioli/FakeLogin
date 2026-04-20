@@ -1,4 +1,4 @@
-const BACKEND = "http://localhost:3001"; // ajuste para a porta do seu backend
+const BACKEND = "http://localhost:3002";
 
 const logar = async () => {
   const email = document.getElementById("usuarioDigitado").value;
@@ -8,6 +8,10 @@ const logar = async () => {
   if (!email || !senha) {
     msg.innerText = "Preencha todos os campos";
     return;
+  }
+
+  if (!email.includes("@")) {
+    msg.innerText = "Preencha um email válido.";
   }
 
   try {
@@ -24,17 +28,17 @@ const logar = async () => {
     }
 
     const dados = await res.json();
+    msg.innerText = dados.message;
 
     if (dados.success) {
-      if (dados.success) {
-        msg.innerText = dados.message;
-        setTimeout(() => (window.location.href = "home.html"), 1500); // relativo -> FrontEnd/pages/home.html
-      } else {
-        msg.innerText = dados.message;
-      }
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1500);
     }
   } catch (erro) {
     console.error("Fetch error:", erro);
     msg.innerText = "Erro ao conectar ao servidor";
   }
 };
+
+console.log("mudança teste");
