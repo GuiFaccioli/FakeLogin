@@ -1,4 +1,4 @@
-const BACKEND = "http://localhost:3001"; // ajuste conforme necessário
+const BACKEND = "http://localhost:3002"; // ajuste conforme necessário
 
 const cadastrar = async () => {
   const usuario = document.getElementById("usuarioCadastrado").value;
@@ -16,6 +16,11 @@ const cadastrar = async () => {
     if (!res.ok) {
       const texto = await res.text().catch(() => null);
       msg.innerText = texto || `Erro ${res.status}`;
+      return;
+    }
+
+    if (!email.includes("@")) {
+      msg.innerText = "Preencha um email válido";
       return;
     }
 
